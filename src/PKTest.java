@@ -26,7 +26,7 @@ public class PKTest {
 
             rsa.initSign(priv);
 
-            String inputFile="original.txt";
+            String inputFile= "original.txt";
             FileInputStream fis = new FileInputStream(inputFile);
             fileContent = new byte[(int)inputFile.length()];
             // the following two lines are new

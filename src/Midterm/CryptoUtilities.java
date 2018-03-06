@@ -1,20 +1,15 @@
+package Midterm;
+
+import javax.crypto.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import javax.crypto.KeyGenerator;
-import java.security.*;
+import java.security.SecureRandom;
 
-
-import javax.crypto.*;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
-public class CryptoUtils {
+public class CryptoUtilities {
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES";
 
@@ -56,9 +51,7 @@ public class CryptoUtils {
             throws Exception {
         doCrypto(Cipher.DECRYPT_MODE, key, inputFile, outputFile);
     }
-    public static void helloworld(){
-        System.out.println("Hello, World");
-    }
+
     private static void doCrypto(int cipherMode, SecretKey key, File inputFile,
                                  File outputFile) throws Exception {
         try {
