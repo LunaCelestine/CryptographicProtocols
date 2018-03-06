@@ -13,6 +13,7 @@ public class PKTest {
 
         try{
 
+            //Generate an instance of an RSA key pair generator and secure random generator
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
 
@@ -25,22 +26,24 @@ public class PKTest {
 
             rsa.initSign(priv);
 
-            String inputFile="Company.java";
+            String inputFile="original.txt";
             FileInputStream fis = new FileInputStream(inputFile);
             fileContent = new byte[(int)inputFile.length()];
             // the following two lines are new
             // they are needed to read the data bytes from the file
             // and store them in the byte array.
-            Path path = Paths.get("Company.java");
+            Path path = Paths.get("original.txt");
             fileContent=Files.readAllBytes(path);
             BufferedInputStream bufin = new BufferedInputStream(fis);
             byte[] buffer = new byte[1024];
             int len;
+            //Estimate number of bytes to be read w/o blocking, updates signature
             while (bufin.available() != 0) {
                 len = bufin.read(buffer);
                 rsa.update(buffer, 0, len);
-            };
+            }
             bufin.close();
+            //Generates signature bytes
             realSig = rsa.sign();
         } catch (Exception e) {
             System.err.println("Caught exception " + e.toString());
